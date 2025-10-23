@@ -37,45 +37,45 @@ const EndScreen = ({ score, totalQuestions, onRetake }: EndScreenProps) => {
   const { title, message } = getMessage();
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
-        <div className="bg-card rounded-3xl shadow-2xl p-8 md:p-12 border border-border text-center">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 mb-6">
-            <Award className="w-12 h-12 text-primary" />
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-background flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl animate-fade-in">
+        <div className="bg-card rounded-3xl shadow-[0_20px_60px_-10px_hsl(var(--primary)/0.2)] p-8 md:p-12 border-2 border-border text-center">
+          <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 mb-6 shadow-lg animate-fade-in">
+            <Award className="w-14 h-14 text-primary" />
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 animate-fade-in">
             {title}
           </h1>
 
-          <div className="bg-primary/5 rounded-2xl p-6 mb-6 border border-primary/20">
-            <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
+          <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-3xl p-8 mb-8 border-2 border-primary/20 shadow-inner">
+            <div className="text-6xl md:text-7xl font-bold text-primary mb-3 animate-fade-in">
               {score}/{totalQuestions}
             </div>
-            <div className="text-xl text-muted-foreground">
+            <div className="text-xl md:text-2xl font-semibold text-muted-foreground">
               {percentage}% Correct
             </div>
           </div>
 
-          <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-foreground/80 mb-10 leading-relaxed max-w-lg mx-auto">
             {message}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button
               onClick={onRetake}
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-7 text-lg font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
             >
-              <RefreshCw className="w-5 h-5 mr-2" />
+              <RefreshCw className="w-6 h-6 mr-2" />
               Retake Quiz
             </Button>
           </div>
 
           <div className="mt-8 pt-8 border-t border-border">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Heart className="w-5 h-5 text-primary fill-primary" />
-              <span className="text-sm">
+            <div className="flex items-center justify-center gap-3 text-muted-foreground">
+              <Heart className="w-6 h-6 text-primary fill-primary animate-pulse" />
+              <span className="text-sm md:text-base">
                 Remember: Your health matters. Don't hesitate to see a doctor if you have concerns.
               </span>
             </div>
