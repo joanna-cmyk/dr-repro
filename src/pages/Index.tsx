@@ -1,94 +1,35 @@
 import { useState } from "react";
-import { quizQuestions } from "@/data/quizData";
-import QuizHeader from "@/components/QuizHeader";
-import QuestionCard from "@/components/QuestionCard";
-import FeedbackSection from "@/components/FeedbackSection";
-import QuizNavigation from "@/components/QuizNavigation";
-import EndScreen from "@/components/EndScreen";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import CaseFiles from "./CaseFiles";
+import Quiz from "./Quiz";
 
 const Index = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
-  const [score, setScore] = useState(0);
-  const [showEndScreen, setShowEndScreen] = useState(false);
-
-  const currentQuestion = quizQuestions[currentQuestionIndex];
-  const selectedAnswer = selectedAnswers[currentQuestion.id];
-  const isAnswered = selectedAnswer !== undefined;
-  const correctAnswer = currentQuestion.options.find((opt) => opt.isCorrect);
-  const isCorrect = selectedAnswer === correctAnswer?.label;
-
-  const handleSelectAnswer = (label: string) => {
-    if (isAnswered) return;
-
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: label,
-    }));
-
-    const selectedOption = currentQuestion.options.find((opt) => opt.label === label);
-    if (selectedOption?.isCorrect) {
-      setScore((prev) => prev + 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex < quizQuestions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      setShowEndScreen(true);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
-    }
-  };
-
-  const handleRetake = () => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswers({});
-    setScore(0);
-    setShowEndScreen(false);
-  };
-
-  if (showEndScreen) {
-    return (
-      <EndScreen
-        score={score}
-        totalQuestions={quizQuestions.length}
-        onRetake={handleRetake}
-      />
-    );
-  }
+  const [activeTab, setActiveTab] = useState("case-files");
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
-      <QuizHeader
-        currentQuestion={currentQuestionIndex + 1}
-        totalQuestions={quizQuestions.length}
-        score={score}
-      />
+    <div className="min-h-screen bg-background">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
+          <div className="max-w-7xl mx-auto px-4">
+            <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 h-12">
+              <TabsTrigger value="case-files" className="text-base">
+                Case Files
+              </TabsTrigger>
+              <TabsTrigger value="quiz" className="text-base">
+                Quiz
+              </TabsTrigger>
+            </TabsList>
+          </div>
+        </div>
 
-      <QuestionCard
-        question={currentQuestion}
-        selectedAnswer={selectedAnswer}
-        onSelectAnswer={handleSelectAnswer}
-        isAnswered={isAnswered}
-      />
+        <TabsContent value="case-files" className="mt-0">
+          <CaseFiles />
+        </TabsContent>
 
-      {isAnswered && (
-        <FeedbackSection question={currentQuestion} isCorrect={isCorrect} />
-      )}
-
-      <QuizNavigation
-        currentQuestion={currentQuestionIndex + 1}
-        totalQuestions={quizQuestions.length}
-        canGoNext={isAnswered}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-      />
+        <TabsContent value="quiz" className="mt-0">
+          <Quiz />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
