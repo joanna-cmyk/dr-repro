@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CaseFiles from "./CaseFiles";
-import Quiz from "./Quiz";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("case-files");
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Determine active tab from URL
+  const activeTab = location.pathname === "/quiz" ? "quiz" : "case-files";
+
+  const handleTabChange = (value: string) => {
+    navigate(value === "quiz" ? "/quiz" : "/case-files");
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
           <div className="max-w-7xl mx-auto px-4">
             <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 h-12">
@@ -22,13 +28,9 @@ const Index = () => {
           </div>
         </div>
 
-        <TabsContent value="case-files" className="mt-0">
-          <CaseFiles />
-        </TabsContent>
-
-        <TabsContent value="quiz" className="mt-0">
-          <Quiz />
-        </TabsContent>
+        <div className="mt-0">
+          <Outlet />
+        </div>
       </Tabs>
     </div>
   );
