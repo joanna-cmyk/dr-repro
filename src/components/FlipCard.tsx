@@ -15,7 +15,7 @@ const FlipCard = ({ caseFile, isUnlocked, onUnlock }: FlipCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-card rounded-xl shadow-[0_8px_24px_-8px_hsl(var(--primary)/0.12)] border border-border p-5 md:p-6 transition-all duration-300 hover:shadow-[0_12px_32px_-8px_hsl(var(--primary)/0.18)]">
       {/* Flip Card */}
       <div 
         className="relative w-full aspect-[4/3] cursor-pointer group"
@@ -31,7 +31,7 @@ const FlipCard = ({ caseFile, isUnlocked, onUnlock }: FlipCardProps) => {
         >
           {/* Front of Card */}
           <div
-            className="absolute inset-0 bg-card rounded-lg shadow-md border border-border p-6 flex flex-col items-center justify-center text-center"
+            className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border p-6 flex flex-col items-center justify-center text-center"
             style={{ backfaceVisibility: "hidden" }}
           >
             {isUnlocked && (
@@ -47,16 +47,16 @@ const FlipCard = ({ caseFile, isUnlocked, onUnlock }: FlipCardProps) => {
 
           {/* Back of Card */}
           <div
-            className="absolute inset-0 bg-card rounded-lg shadow-md border border-border p-6 overflow-y-auto"
+            className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border p-6 md:p-8 overflow-y-auto flex flex-col items-center justify-center"
             style={{
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
             }}
           >
-            <p className="text-sm leading-relaxed text-foreground mb-4">
+            <p className="text-sm md:text-base leading-relaxed text-foreground text-center max-w-prose">
               {caseFile.scenario}
             </p>
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-xs text-muted-foreground text-center mt-6">
               Click to flip back ↺
             </p>
           </div>
@@ -64,9 +64,9 @@ const FlipCard = ({ caseFile, isUnlocked, onUnlock }: FlipCardProps) => {
       </div>
 
       {/* Code Entry Section */}
-      <div className="w-full mt-6 bg-muted/30 rounded-lg p-6 border border-border">
+      <div className="w-full mt-5 md:mt-6 pt-5 md:pt-6 border-t border-border">
         <div className="text-center space-y-3">
-          <h4 className="text-lg font-semibold flex items-center justify-center gap-2">
+          <h4 className="text-base md:text-lg font-semibold flex items-center justify-center gap-2">
             <Lock className="h-5 w-5" />
             Unlock the Answer
           </h4>

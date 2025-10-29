@@ -20,12 +20,12 @@ const QuestionCard = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4">
-      <div className="bg-card rounded-2xl shadow-[0_10px_30px_-10px_hsl(var(--primary)/0.15)] p-6 md:p-8 border border-border transition-all duration-300 hover:shadow-[0_15px_40px_-10px_hsl(var(--primary)/0.2)]">
-        <h2 className="text-xl md:text-2xl font-bold text-foreground mb-6 leading-relaxed">
+      <div className="bg-card rounded-2xl shadow-[0_10px_30px_-10px_hsl(var(--primary)/0.15)] p-4 md:p-6 border border-border transition-all duration-300 hover:shadow-[0_15px_40px_-10px_hsl(var(--primary)/0.2)]">
+        <h2 className="text-lg md:text-xl font-bold text-foreground mb-4 leading-snug">
           {question.question}
         </h2>
 
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {question.options.map((option) => {
             const isSelected = selectedAnswer === option.label;
             const showCorrect = isAnswered && option.isCorrect;
@@ -37,7 +37,7 @@ const QuestionCard = ({
                 onClick={() => !isAnswered && onSelectAnswer(option.label)}
                 disabled={isAnswered}
                 className={cn(
-                  "w-full text-left p-4 md:p-5 rounded-xl border-2 transition-all duration-300 min-h-[60px]",
+                  "w-full text-left p-3 md:p-4 rounded-xl border-2 transition-all duration-300 min-h-[52px]",
                   "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                   !isAnswered && "hover:border-primary hover:bg-primary/5 hover:shadow-md hover:scale-[1.01] cursor-pointer active:scale-[0.99]",
                   isAnswered && "cursor-not-allowed",
@@ -46,10 +46,10 @@ const QuestionCard = ({
                   showWrong && "border-error-foreground bg-error shadow-md"
                 )}
               >
-                <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex items-start gap-2.5 md:gap-3">
                   <span
                     className={cn(
-                      "flex-shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-sm md:text-base transition-all duration-300",
+                      "flex-shrink-0 w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300",
                       !isAnswered && "bg-secondary text-secondary-foreground",
                       isSelected && !isAnswered && "bg-primary text-primary-foreground shadow-sm",
                       showCorrect && "bg-success text-success-foreground shadow-md",
@@ -58,14 +58,14 @@ const QuestionCard = ({
                   >
                     {option.label}
                   </span>
-                  <span className="flex-1 text-base md:text-lg text-foreground pt-1.5 leading-relaxed">
+                  <span className="flex-1 text-sm md:text-base text-foreground pt-1 leading-snug">
                     {option.text}
                   </span>
                   {showCorrect && (
-                    <CheckCircle2 className="flex-shrink-0 w-6 h-6 md:w-7 md:h-7 text-success animate-fade-in" />
+                    <CheckCircle2 className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 text-success animate-fade-in" />
                   )}
                   {showWrong && (
-                    <XCircle className="flex-shrink-0 w-6 h-6 md:w-7 md:h-7 text-error-foreground animate-fade-in" />
+                    <XCircle className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 text-error-foreground animate-fade-in" />
                   )}
                 </div>
               </button>

@@ -64,7 +64,7 @@ const Quiz = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
+    <div className="min-h-screen bg-background py-4 px-4">
       <QuizHeader
         currentQuestion={currentQuestionIndex + 1}
         totalQuestions={quizQuestions.length}
