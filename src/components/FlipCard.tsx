@@ -47,18 +47,20 @@ const FlipCard = ({ caseFile, isUnlocked, onUnlock }: FlipCardProps) => {
 
           {/* Back of Card */}
           <div
-            className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border p-6 md:p-8 overflow-y-auto flex flex-col items-center justify-center"
+            className="absolute inset-0 bg-background rounded-lg shadow-sm border border-border p-4 md:p-6 overflow-y-auto"
             style={{
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
             }}
           >
-            <p className="text-sm md:text-base leading-relaxed text-foreground text-center max-w-prose">
-              {caseFile.scenario}
-            </p>
-            <p className="text-xs text-muted-foreground text-center mt-6">
-              Click to flip back ↺
-            </p>
+            <div className="min-h-full flex flex-col items-center justify-center py-2">
+              <p className="text-xs md:text-sm leading-relaxed text-foreground text-center max-w-prose">
+                {caseFile.scenario}
+              </p>
+              <p className="text-xs text-muted-foreground text-center mt-4 flex-shrink-0">
+                Click to flip back ↺
+              </p>
+            </div>
           </div>
         </div>
       </div>
